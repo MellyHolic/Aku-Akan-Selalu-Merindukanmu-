@@ -111,14 +111,21 @@
             "meli/Screenshot_20260321-131444~269.png", "meli/Screenshot_20260410-152545~2.png"
         ];
 
-        function start() {
-            // Munculkan elemen setiap 40ms agar layar penuh
+       function start() {
             setInterval(createLove, 40);
             
-            // Putar musik saat layar diklik pertama kali
-            document.body.addEventListener('click', () => {
-                audio.play();
-            }, {once: true});
+            // Mencoba paksa putar saat halaman dimuat
+            const playPromise = audio.play();
+
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                    // Autoplay berhasil
+                }).catch(error => {
+                    // Autoplay diblokir, tunggu interaksi apa pun di layar
+                    document.body.addEventListener('touchstart', () => audio.play(), {once: true});
+                    document.body.addEventListener('mousedown', () => audio.play(), {once: true});
+                });
+            }
         }
 
         function createLove() {

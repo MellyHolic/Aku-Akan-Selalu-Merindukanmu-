@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Rain for Meli</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            overflow: hidden;
+            height: 100vh;
+            font-family: 'Arial Black', sans-serif;
+        }
+
+        .container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Teks Neon */
+        .neon-text {
+            position: absolute;
+            color: #fff;
+            white-space: nowrap;
+            text-shadow: 
+                0 0 5px #fff,
+                0 0 15px #ff00bf,
+                0 0 30px #ff00b3;
+            opacity: 0.85;
+            user-select: none;
+            transform: scaleX(1.3) rotate(15deg);
+            animation: slideDiagonal linear infinite;
+        }
+
+        /* Titik Bintang */
+        .star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #fff;
+            animation: slideDiagonal linear infinite;
+        }
+
+        /* Hati */
+        .heart {
+            position: absolute;
+            color: #ff0000;
+            text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;
+            animation: slideDiagonal linear infinite;
+        }
+
+        /* Foto Meli */
+        .floating-img {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 15px;
+            border: 3px solid #fff;
+            box-shadow: 0 0 25px #ff009d;
+            animation: slideDiagonal linear infinite;
+            z-index: 10;
+        }
+
+        @keyframes slideDiagonal {
+            0% {
+                transform: translate(-50vw, -50vh) rotate(15deg) scale(0.8);
+                opacity: 0;
+            }
+            15% { opacity: 1; }
+            85% { opacity: 1; }
+            100% {
+                transform: translate(150vw, 150vh) rotate(15deg) scale(1.2);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body onload="start()">
+
+    <div class="container" id="main"></div>
+
+    <audio id="bgMusic" loop>
+        <source src="Hei Manis.mpeg" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const container = document.getElementById('main');
+        const audio = document.getElementById('bgMusic');
+
+        // Daftar Lengkap Foto dari Folder /meli/
+        const photos = [
+            "meli/DSC00011~2.JPG", "meli/DSC00012~2.JPG", "meli/DSC00015~2.JPG",
+            "meli/DSC00043~2.JPG", "meli/DSC00046~2.JPG", "meli/DSC00050~2.JPG",
+            "meli/DSC07249~2.JPG", "meli/DSC07250~2.JPG", "meli/DSC07251~2.JPG",
+            "meli/DSC09741.JPG", "meli/DSC09743.JPG", "meli/GIO02356.JPG",
+            "meli/GIO02357.JPG", "meli/GIO06636~2 (1).jpg", "meli/IMG-20260311-WA0026.jpg",
+            "meli/IMG-20260311-WA0028.jpg", "meli/jhjjjkkgkjkjjj.png", "meli/meli copy.jpg",
+            "meli/memori 1.jpg", "meli/memori 2.jpg", "meli/memori 3.png",
+            "meli/memori 4.jpg", "meli/Screenshot_20251019-093206.png",
+            "meli/Screenshot_20260213-090339~2.jpg", "meli/Screenshot_20260213-090343~2.jpg",
+            "meli/Screenshot_20260216-090242~2.png", "meli/Screenshot_20260216-162016~2.png",
+            "meli/Screenshot_20260216-162026~2.png", "meli/Screenshot_20260216-162036~2.png",
+            "meli/Screenshot_20260216-162044~2.png", "meli/Screenshot_20260216-162053~2.png",
+            "meli/Screenshot_20260216-162104~2.png", "meli/Screenshot_20260216-162112~2.png",
+            "meli/Screenshot_20260219-123700~2.png", "meli/Screenshot_20260321-131444~2.png",
+            "meli/Screenshot_20260321-131444~24.png", "meli/Screenshot_20260321-131444~26.png",
+            "meli/Screenshot_20260321-131444~269.png", "meli/Screenshot_20260410-152545~2.png"
+        ];
+
+        function start() {
+            // Munculkan elemen setiap 40ms agar layar penuh
+            setInterval(createLove, 40);
+            
+            // Putar musik saat layar diklik pertama kali
+            document.body.addEventListener('click', () => {
+                audio.play();
+            }, {once: true});
+        }
+
+        function createLove() {
+            const rand = Math.random();
+            let el;
+
+            if (rand > 0.93) { // Probabilitas foto muncul
+                el = document.createElement('img');
+                el.className = 'floating-img';
+                el.src = photos[Math.floor(Math.random() * photos.length)];
+            } else if (rand > 0.85) { 
+                el = document.createElement('div');
+                el.className = 'star';
+                const size = Math.random() * 4 + 2 + 'px';
+                el.style.width = size;
+                el.style.height = size;
+            } else if (rand > 0.70) { 
+                el = document.createElement('div');
+                el.className = 'heart';
+                el.innerHTML = '❤️';
+                el.style.fontSize = Math.random() * 40 + 20 + 'px';
+            } else { 
+                el = document.createElement('div');
+                el.className = 'neon-text';
+                el.innerHTML = 'I love you ♡';
+                el.style.fontSize = Math.random() * 60 + 20 + 'px';
+            }
+
+            // Sebaran posisi acak
+            el.style.left = Math.random() * 180 - 60 + 'vw';
+            
+            // Durasi jatuh acak
+            const duration = Math.random() * 4 + 6;
+            el.style.animationDuration = duration + 's';
+
+            container.appendChild(el);
+
+            // Hapus elemen setelah selesai animasi agar tidak berat
+            setTimeout(() => el.remove(), duration * 1000);
+        }
+    </script>
+</body>
+</html>

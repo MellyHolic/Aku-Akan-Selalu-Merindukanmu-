@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Message for Meli</title>
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <section class="hero">
+        <div class="content">
+            <p class="subtitle">A SPECIAL MESSAGE FOR</p>
+            <h1>Meli</h1>
+            <p class="quote">"Every story has an end, but our memories will last forever."</p>
+            
+            <div class="envelope-wrapper" id="envelope">
+                <div class="heart">❤️</div>
+                <div class="letter">
+                    <div class="letter-content">
+    <h3>Dear Meli,</h3>
+    
+    <p>First of all, <b>Happy Graduation!</b> 🎉 Akhirnya ya, satu bab besar dalam hidupmu resmi selesai hari ini. Aku bener-bener bangga liat perjuanganmu, especially pas kamu lagi pusing-pusingnya ngurusin sidang KTI P2SM kemarin. You did it, and you did it wonderfully!</p>
+    
+    <p>Tadi aku baru aja liat jadwal sidang kelulusanmu, and I realized it's on May 4th—tepat di hari ulang tahunmu. So, double congratulations! <b>Happy Birthday and Happy Graduation!</b> I hope your new age brings you so much joy, love, and all the beautiful things you’ve been dreaming of.</p>
+
+    <p>Please remember this: <b>You are always a winner.</b> Kamu perempuan yang sangat baik, Mel. Meskipun seringkali ada orang yang menyakitimu, I truly believe you are strong enough to face everything. You have that spark in you that no one can put out.</p>
+    
+    <p>I also want to say I'm sorry... Maaf karena aku sempat mengecewakanmu dengan belum bisa mengungkapkan siapa identitasku sebenarnya. And I'm sorry if I can only give you flowers and chocolates for now. I hope they can at least make you smile today.</p>
+
+    <p>I know, <i>you don't have to know who I am, and you don't even have to remember me.</i> Kamu punya masa depan yang luar biasa cerah di depan sana, and I truly believe you'll achieve great things. Aku pun sama, I’ll be fighting for my own path too.</p>
+    
+    <p>But please know that <b>I will never forget you.</b> Semoga takdir is kind enough to let our paths cross again someday, di saat kita berdua udah jadi versi terbaik dari diri kita masing-masing. And who knows? Maybe then, fate will finally be on our side.</p>
+    
+    <p class="signature" style="font-style: italic; color: #ff85a1; margin-top: 25px; text-align: right;">
+        Take care of yourself, Mel. <br>
+        Your Secret Admin, signing off.
+    </p>
+</div>
+                </div>
+            </div>
+            
+            <p class="instruction">Klik amplopnya!</p>
+        </div>
+    </section>
+
+    <section class="memories" id="memories">
+        <h2>Our Memories</h2>
+        <div class="photo-gallery">
+            <div class="photo-card"><img src="meli\memori 1.jpg" alt="Memory 1"></div>
+            <div class="photo-card"><img src="meli\memori 2.jpg" alt="Memory 2"></div>
+            <div class="photo-card"><img src="meli\memori 3.png" alt="Memory 3"></div>
+            <div class="photo-card"><img src="meli\memori 4.jpg" alt="Memory 4"></div>
+        </div>
+    </section>
+
+    <section class="songs" id="songs">
+        <div class="playlist-container">
+            <div class="playlist-header">
+                <div class="icon-circle">🎵</div>
+                <h3>Our Songs</h3>
+                <p>Pilih lagu untuk menemanimu membaca</p>
+            </div>
+            
+            <div class="song-list">
+                <div class="song-item" onclick="playAudio('Risk It All_spotdown.org.mp3', this)">
+                    <div class="song-index">01</div>
+                    <div class="song-details">
+                        <span class="song-title">Risk It All</span>
+                        <span class="song-artist">Bruno Mars</span>
+                    </div>
+                    <div class="play-indicator">▶</div>
+                </div>
+
+                <div class="song-item" onclick="playAudio('Kekal_spotdown.org.mp3', this)">
+                    <div class="song-index">02</div>
+                    <div class="song-details">
+                        <span class="song-title">Kekal</span>
+                        <span class="song-artist">Nadin Amizah</span>
+                    </div>
+                    <div class="play-indicator">▶</div>
+                </div>
+                
+                <div class="song-item" onclick="playAudio('double take_spotdown.org.mp3', this)">
+                    <div class="song-index">03</div>
+                    <div class="song-details">
+                        <span class="song-title">double take</span>
+                        <span class="song-artist">Dhruv</span>
+                    </div>
+                    <div class="play-indicator">▶</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="closure-section">
+        <div class="content">
+            <p>This might be the end of our digital messages...</p>
+            <p>Tapi, before I go, I have a little something for you.</p>
+            <p>Pilih 'Ya' untuk menerimanya.</p>
+            
+            <div class="action-buttons">
+                <a href="cinta.html" class="btn btn-yes">Ya</a>
+                <button class="btn btn-no" onclick="alert('Think twice, Meli... Don\'t say no just yet.')">Tidak</button>
+            </div>
+        </div>
+    </section>
+
+    <audio id="mainAudio"></audio>
+
+    <footer class="footer">
+        <p>Made with love,</p>
+        <p class="brand">Forever & Always</p>
+        <p class="grad-text">Happy Graduation & Early Birthday, Meli! ✨</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,288 @@
+/* --- CSS DASAR & VARIABEL --- */
+:root {
+    --pink-bg: #fdf2f5;
+    --pink-primary: #e94d58;
+    --pink-soft: #ff85a1;
+    --white: #ffffff;
+    --gray-text: #4a4a4a;
+    --gray-sub: #888;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--pink-bg);
+    font-family: 'Quicksand', sans-serif;
+    color: var(--gray-text);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+.content, .container {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- STYLING SECTION 1: HERO & AMPLOP --- */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 50px;
+}
+
+.subtitle { letter-spacing: 3px; font-size: 0.8rem; color: var(--gray-sub); }
+
+h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 4.5rem;
+    color: var(--pink-primary);
+    margin: 10px 0;
+}
+
+.quote { font-style: italic; color: var(--gray-sub); margin-bottom: 40px; font-size: 0.9rem; }
+
+/* KUNCI PERBAIKAN: Styling Amplop Utama */
+/* Container Utama Amplop */
+.envelope-wrapper {
+    position: relative;
+    width: 220px;
+    height: 150px;
+    background: var(--white); /* Badan amplop */
+    margin: 0 auto;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+    cursor: pointer;
+    z-index: 10;
+    
+    /* PENTING: Sembunyikan apapun yang keluar dari kotak amplop saat tertutup */
+    overflow: hidden; 
+    transition: overflow 0s 0.5s; /* Tunda perubahan overflow agar surat bisa naik */
+}
+
+/* Saat Amplop Terbuka: Izinkan surat keluar */
+.envelope-wrapper.open {
+    overflow: visible;
+}
+
+/* Kertas Surat di Dalam */
+.letter {
+    position: absolute;
+    bottom: 5px; 
+    left: 10px;
+    width: 200px;
+    height: 130px;
+    background: var(--white);
+    padding: 20px;
+    transition: all 0.5s ease-in-out;
+    z-index: 2; /* Di bawah penutup segitiga */
+    border-radius: 5px;
+    
+    /* Sembunyikan teks saat di dalam amplop */
+    display: flex;
+    flex-direction: column;
+    opacity: 0; 
+}
+
+/* Saat Terbuka: Munculkan surat dan naik ke atas */
+.envelope-wrapper.open .letter {
+    opacity: 1;
+    transform: translateY(-130px); /* Surat naik keluar */
+    height: 350px; /* Panjang surat saat terbuka */
+    width: 260px;
+    left: -20px;
+    z-index: 5;
+    overflow-y: auto; /* Aktifkan scroll untuk pesan panjang */
+}
+
+/* Segitiga Penutup (Bagian Atas) */
+.envelope-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    z-index: 4; /* Tutupi surat saat tertutup */
+    border-left: 110px solid transparent;
+    border-right: 110px solid transparent;
+    border-top: 90px solid var(--pink-soft);
+    transform-origin: top;
+    transition: all 0.5s ease-in-out;
+}
+
+.envelope-wrapper.open::before {
+    transform: rotateX(180deg);
+    z-index: 1; /* Pindah ke belakang saat terbuka */
+}
+
+/* KUNCI PERBAIKAN: Saat Amplop Terbuka (Surat Panjang + Scroll) */
+.envelope-wrapper.open .letter {
+    transform: translateY(-130px); /* Naik keluar amplop */
+    height: 320px; /* Surat jadi panjang saat di luar */
+    width: 260px;  /* Surat sedikit melebar agar teks tidak sesak */
+    left: -20px;   /* Penyesuaian posisi tengah */
+    z-index: 5;    /* Pindah ke paling depan */
+    
+    /* KUNCI: Aktifkan scroll hanya saat sudah di luar */
+    overflow-y: auto; 
+    overflow-x: hidden;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+/* Styling Isi Teks Surat */
+.letter-content {
+    text-align: left;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--gray-text);
+    height: 100%;
+    padding-right: 5px;
+}
+
+.letter-content h3 {
+    font-family: 'Dancing Script', cursive;
+    color: var(--pink-primary);
+    margin-top: 0;
+    font-size: 1.5rem;
+}
+
+/* Kustomisasi scrollbar surat */
+.letter::-webkit-scrollbar { width: 3px; }
+.letter::-webkit-scrollbar-thumb { background: var(--pink-soft); border-radius: 10px; }
+
+/* Ikon Hati */
+.heart {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    font-size: 1.8rem;
+    transition: 0.3s ease;
+}
+
+/* Hati menghilang saat terbuka supaya tidak menutupi teks */
+.envelope-wrapper.open .heart {
+    opacity: 0;
+}
+
+.instruction { margin-top: 40px; color: var(--pink-soft); font-size: 0.8rem; font-weight: bold; }
+
+/* --- CSS SECTION 2: GALERI MEMORI --- */
+.memories { padding: 100px 0; background: #fffafb; text-align: center;}
+.memories h2 { font-size: 2rem; margin-bottom: 50px; color: var(--gray-text); font-weight: 700; }
+.photo-gallery { display: flex; flex-direction: column; gap: 25px; align-items: center;}
+
+.photo-card {
+    background: var(--white);
+    padding: 12px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+    width: 90%;
+    max-width: 400px;
+}
+
+.photo-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 15px;
+    display: block;
+}
+
+/* --- CSS SECTION 3: PLAYLIST --- */
+.songs { padding: 100px 0; background-color: #fefefe; }
+
+.playlist-container {
+    width: 90%;
+    max-width: 450px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 30px;
+    padding: 30px 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.04);
+}
+
+.playlist-header { text-align: center; margin-bottom: 30px; }
+
+.icon-circle {
+    width: 70px; height: 70px; 
+    background: var(--white);
+    border-radius: 50%; display: flex; justify-content: center; align-items: center;
+    margin: -60px auto 20px; 
+    font-size: 1.8rem;
+    box-shadow: 0 10px 25px rgba(233, 77, 88, 0.15);
+}
+
+.playlist-header h3 { font-size: 1.3rem; margin: 0; color: var(--gray-text); font-weight: 700; }
+.playlist-header p { color: var(--gray-sub); font-size: 0.9rem; margin-top: 5px; }
+
+.song-list { padding: 10px; }
+
+.song-item {
+    display: flex; align-items: center; padding: 18px 15px;
+    margin-bottom: 5px; border-radius: 15px; cursor: pointer; transition: 0.3s ease;
+}
+
+.song-item:hover { background: var(--pink-bg); transform: translateY(-2px); }
+.song-item.active { background: #ffe4e9; }
+
+.song-index { width: 35px; font-weight: 700; color: var(--pink-soft); font-size: 0.9rem; text-align: center;}
+.song-details { flex-grow: 1; text-align: left; display: flex; flex-direction: column; }
+.song-title { font-weight: 600; color: var(--gray-text); font-size: 1rem; }
+.song-artist { font-size: 0.75rem; color: var(--gray-sub); }
+.play-indicator { color: var(--pink-soft); font-size: 0.7rem; opacity: 0; transition: 0.3s; }
+.song-item:hover .play-indicator, .song-item.active .play-indicator { opacity: 1; }
+
+/* --- SECTION 4: TOMBOL PERPISAHAN AKHIR --- */
+.closure-section {
+    padding: 100px 0;
+    text-align: center;
+    background: #fffafb;
+    border-top: 1px solid #ffe4e9;
+}
+
+.closure-section p { color: var(--gray-sub); font-size: 0.95rem; margin: 10px 0; }
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.btn {
+    padding: 12px 40px;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s ease;
+    border: none;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-yes {
+    background-color: var(--pink-primary);
+    color: white;
+    box-shadow: 0 5px 15px rgba(233, 77, 88, 0.3);
+}
+.btn-yes:hover { background-color: var(--pink-soft); transform: scale(1.05); }
+
+.btn-no {
+    background-color: transparent;
+    border: 2px solid #ccc;
+    color: #888;
+}
+.btn-no:hover { border-color: #999; color: #666; background: #f0f0f0; }
+
+/* --- CSS FOOTER --- */
+.footer { padding: 80px 0; text-align: center; }
+.brand { font-family: 'Dancing Script', cursive; font-size: 2rem; color: var(--pink-primary); margin: 0; }
+.grad-text { font-size: 0.8rem; margin-top: 10px; color: var(--gray-sub); }
